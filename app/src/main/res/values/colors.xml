@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#6200EE</color>
+    <color name="primaryColorDark">#3700B3</color>
+    <color name="accentColor">#03DAC5</color>
+    <color name="rippleColor">#1F000000</color>
+    <color name="errorColor">#B00020</color>
+
+    <color name="backgroundColor">#FFFFFF</color>
+    <color name="backgroundColorDark">#F0F0F0</color>
+
+    <color name="textColor">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+    <color name="textColorTertiary">#9E9E9E</color>
+
+    <color name="darkTextColor">#212121</color>
+    <color name="darkTextColorSecondary">#757575</color>
+    <color name="darkTextColorTertiary">#9E9E9E</color>
+
+    <color name="hintColor">#B0BEC5</color>
+    <color name="dividerColor">#E0E0E0</color>
+
+    <color name="buttonTextColor">#FFFFFF</color>
+    <color name="buttonBackgroundColor">#FF5722</color>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/entries"
+        android:icon="@drawable/ic_insights"
+        android:title="@string/menu_insights"
+        android:layout_width="0dp"
+        android:layout_weight="1" />
+    <item
+        android:id="@+id/calendar"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/menu_calendar"
+        android:layout_width="0dp"
+        android:layout_weight="1" />
+</menu>
