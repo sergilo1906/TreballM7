@@ -9,8 +9,11 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import cat.insbaixcamp.gratitudejournal.fragments.LoginFragment;
 import cat.insbaixcamp.gratitudejournal.utils.AuthUtils;
+import cat.insbaixcamp.gratitudejournal.utils.BottomNavigationUtils;
 import cat.insbaixcamp.gratitudejournal.utils.UserUtils;
 import cat.insbaixcamp.gratitudejournal.R;
 
@@ -38,12 +41,15 @@ public class UserAdapter {
     }
 
     private void navigateToLoginFragment() {
+        new BottomNavigationUtils(context).hide();
+
         ((FragmentActivity) context).getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new LoginFragment())
                 .addToBackStack(null)
                 .commit();
     }
+
 
     private void setUpAddPointButton(View view) {
         Button btnAddPoint = view.findViewById(R.id.btn_add_point);
@@ -87,7 +93,6 @@ public class UserAdapter {
         }));
     }
 
-    // Set up the "Remove Account" button
     public void setUpRemoveAccountButton(View view) {
         Button btnRemoveAccount = view.findViewById(R.id.btn_remove_account);
         btnRemoveAccount.setOnClickListener(v -> new AlertDialog.Builder(context)

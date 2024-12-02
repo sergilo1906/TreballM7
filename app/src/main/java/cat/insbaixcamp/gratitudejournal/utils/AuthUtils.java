@@ -33,6 +33,7 @@ public class AuthUtils {
 
     // Helper method to navigate to InsightsFragment after login
     private void navigateToInsightsFragment() {
+        new BottomNavigationUtils(context).show();
         ((FragmentActivity) context).getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new InsightsFragment())
