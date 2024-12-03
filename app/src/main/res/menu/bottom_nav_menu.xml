@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/entries"
-        android:icon="@drawable/ic_insights"
-        android:title="@string/menu_insights"
         android:layout_width="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:icon="@drawable/ic_insights"
+        android:title="@string/menu_insights" />
     <item
         android:id="@+id/user"
-        android:icon="@drawable/ic_user"
-        android:title="@string/menu_user"
         android:layout_width="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:icon="@drawable/ic_user"
+        android:title="@string/menu_user" />
     <item
         android:id="@+id/calendar"
-        android:icon="@drawable/ic_calendar"
-        android:title="@string/menu_calendar"
         android:layout_width="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/menu_calendar" />
 </menu>

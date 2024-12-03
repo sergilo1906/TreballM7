@@ -9,11 +9,11 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import cat.insbaixcamp.gratitudejournal.fragments.LoginFragment;
 import cat.insbaixcamp.gratitudejournal.utils.AuthUtils;
 import cat.insbaixcamp.gratitudejournal.utils.BottomNavigationUtils;
+import cat.insbaixcamp.gratitudejournal.utils.FragmentUtils;
+import cat.insbaixcamp.gratitudejournal.utils.SideBarUtils;
 import cat.insbaixcamp.gratitudejournal.utils.UserUtils;
 import cat.insbaixcamp.gratitudejournal.R;
 
@@ -42,14 +42,9 @@ public class UserAdapter {
 
     private void navigateToLoginFragment() {
         new BottomNavigationUtils(context).hide();
-
-        ((FragmentActivity) context).getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new LoginFragment())
-                .addToBackStack(null)
-                .commit();
+        new SideBarUtils(context).disable();
+        FragmentUtils.navigateTo((FragmentActivity) context, new LoginFragment(), true);
     }
-
 
     private void setUpAddPointButton(View view) {
         Button btnAddPoint = view.findViewById(R.id.btn_add_point);

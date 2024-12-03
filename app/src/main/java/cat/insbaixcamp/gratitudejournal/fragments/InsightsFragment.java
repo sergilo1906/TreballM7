@@ -21,16 +21,16 @@ public class InsightsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entries, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_entries);
+
+        RecyclerView rv = view.findViewById(R.id.recycler_view_entries);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+
         List<TextItem> textItemList = new ArrayList<>();
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         textItemList.add(new TextItem("Item 1"));
         textItemList.add(new TextItem("Item 2"));
         textItemList.add(new TextItem("Item 3"));
 
-        recyclerView.setAdapter(new TextBoxAdapter(textItemList));
+        rv.setAdapter(new TextBoxAdapter(textItemList));
 
         return view;
     }

@@ -13,7 +13,6 @@ import java.util.Objects;
 
 import androidx.fragment.app.FragmentActivity;
 
-import cat.insbaixcamp.gratitudejournal.R;
 import cat.insbaixcamp.gratitudejournal.fragments.InsightsFragment;
 
 
@@ -34,11 +33,8 @@ public class AuthUtils {
     // Helper method to navigate to InsightsFragment after login
     private void navigateToInsightsFragment() {
         new BottomNavigationUtils(context).show();
-        ((FragmentActivity) context).getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new InsightsFragment())
-                .addToBackStack(null)
-                .commit();
+        new SideBarUtils(context).enable();
+        FragmentUtils.navigateTo((FragmentActivity) context, new InsightsFragment(), true);
     }
 
     // Sign in with email and password
