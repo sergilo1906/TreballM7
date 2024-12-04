@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import cat.insbaixcamp.gratitudejournal.fragments.LoginFragment;
 import cat.insbaixcamp.gratitudejournal.utils.AuthUtils;
 import cat.insbaixcamp.gratitudejournal.R;
+import cat.insbaixcamp.gratitudejournal.utils.FragmentUtils;
 
 public class RegisterAdapter {
 
@@ -24,13 +25,12 @@ public class RegisterAdapter {
         this.context = context;
     }
 
-    public void setUpRegistration(View view) {
+    public void setup(View view) {
         TextInputEditText etEmail = view.findViewById(R.id.email);
         TextInputEditText etPassword = view.findViewById(R.id.password);
         Button btnRegister = view.findViewById(R.id.btn_register);
         TextView goToLogin = view.findViewById(R.id.go_to_login);
 
-        // Move focus to password field when "Next" is pressed on the email field
         etEmail.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
                 etEmail.requestFocus();
@@ -39,7 +39,6 @@ public class RegisterAdapter {
             return false;
         });
 
-        // Trigger registration when "Done" is pressed on the password field
         etEmail.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 performRegistration(etEmail, etPassword);
@@ -48,16 +47,8 @@ public class RegisterAdapter {
             return false;
         });
 
-        // Trigger registration when the register button is clicked
         btnRegister.setOnClickListener(v -> performRegistration(etEmail, etPassword));
-
-        // Navigate to login screen when the "Go to Login" text is clicked
-        goToLogin.setOnClickListener(v -> ((androidx.fragment.app.FragmentActivity) context)
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new LoginFragment())
-                .addToBackStack(null)
-                .commit());
+        goToLogin.setOnClickListener(v -> FragmentUtils.navigateTo(context, new LoginFragment(), false));
     }
 
     private void performRegistration(TextInputEditText editTextEmail, TextInputEditText editTextPassword) {

@@ -2,8 +2,6 @@ package cat.insbaixcamp.gratitudejournal.middlewares;
 
 import android.content.Context;
 
-import androidx.fragment.app.FragmentActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -23,7 +21,7 @@ public class AuthMiddleware {
     public boolean isAuthenticated() {
         FirebaseUser fbUser = fbAuth.getCurrentUser();
         if (fbUser == null) {
-            FragmentUtils.navigateTo((FragmentActivity) context, new LoginFragment(), true);
+            FragmentUtils.navigateTo(context, new LoginFragment(), true);
             return false;
         }
         return true;

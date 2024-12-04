@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import cat.insbaixcamp.gratitudejournal.fragments.RegisterFragment;
 import cat.insbaixcamp.gratitudejournal.utils.AuthUtils;
 import cat.insbaixcamp.gratitudejournal.R;
+import cat.insbaixcamp.gratitudejournal.utils.FragmentUtils;
 
 public class LoginAdapter {
 
@@ -25,7 +26,7 @@ public class LoginAdapter {
         this.context = context;
     }
 
-    public void setUpLogin(View view) {
+    public void setup(View view) {
         TextInputEditText etEmail = view.findViewById(R.id.email);
         TextInputEditText etPassword = view.findViewById(R.id.password);
         Button btnLogin = view.findViewById(R.id.btn_login);
@@ -48,13 +49,7 @@ public class LoginAdapter {
         });
 
         btnLogin.setOnClickListener(v -> performLogin(etEmail, etPassword));
-
-        goToRegister.setOnClickListener(v -> ((androidx.fragment.app.FragmentActivity) context)
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new RegisterFragment())
-                .addToBackStack(null)
-                .commit());
+        goToRegister.setOnClickListener(v -> FragmentUtils.navigateTo(context, new RegisterFragment(), false));
     }
 
     private void performLogin(TextInputEditText etEmail, TextInputEditText etPassword) {

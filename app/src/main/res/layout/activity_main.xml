@@ -14,21 +14,12 @@
         android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/primaryColor"
-            android:theme="@style/ThemeOverlay.Material3.ActionBar"
-            app:title="Sample text"
-            app:navigationIcon="@drawable/ic_menu" />
-
-        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primaryColor"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
-            android:theme="@style/ThemeOverlay.AppCompat.DayNight" />
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            app:title="My Toolbar" />
 
         <FrameLayout
             android:id="@+id/fragment_container"
@@ -40,6 +31,7 @@
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             app:itemIconTint="@color/primaryColor"
             app:itemTextColor="@color/primaryColor"
             app:menu="@menu/bottom_nav_menu" />

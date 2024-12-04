@@ -1,49 +1,43 @@
 package cat.insbaixcamp.gratitudejournal.utils;
 
 import android.content.Context;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import cat.insbaixcamp.gratitudejournal.R;
+import cat.insbaixcamp.gratitudejournal.fragments.AddFragment;
 import cat.insbaixcamp.gratitudejournal.fragments.CalendarFragment;
-import cat.insbaixcamp.gratitudejournal.fragments.InsightsFragment;
 import cat.insbaixcamp.gratitudejournal.fragments.UserFragment;
 
-public class BottomNavigationUtils {
+public class BottomNavUtils {
 
-    private final Context context;
+    private final AppCompatActivity activity;
     private final BottomNavigationView bottomNavigationView;
 
-    public BottomNavigationUtils(Context context) {
-        this.context = context;
-        this.bottomNavigationView = ((AppCompatActivity) context).findViewById(R.id.bottom_navigation);
+    public BottomNavUtils(Context context) {
+        this.activity = ((AppCompatActivity) context);
+        this.bottomNavigationView = activity.findViewById(R.id.bottom_navigation);
     }
 
     public void setup() {
-        AppCompatActivity activity = (AppCompatActivity) context;
-
         ((BottomNavigationView) activity.findViewById(R.id.bottom_navigation)).setOnItemSelectedListener(item -> {
             Fragment fragment;
 
-            if (item.getItemId() == R.id.entries) {
-                fragment = new InsightsFragment();
+            if (item.getItemId() == R.id.calendar) {
+                fragment = new CalendarFragment();
+            } else if (item.getItemId() == R.id.add) {
+                fragment = new AddFragment();
             } else if (item.getItemId() == R.id.user) {
                 fragment = new UserFragment();
-            } else if (item.getItemId() == R.id.calendar) {
-                fragment = new CalendarFragment();
             } else {
                 return false;
             }
 
-            FragmentUtils.navigateTo(((FragmentActivity) context), fragment, false);
+            FragmentUtils.navigateTo(activity, fragment, false);
             return true;
         });
     }

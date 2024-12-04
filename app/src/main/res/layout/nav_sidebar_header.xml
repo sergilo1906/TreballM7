@@ -23,7 +23,7 @@
             android:layout_height="24dp"
             android:contentDescription="@string/email"
             android:src="@drawable/ic_email"
-            app:tint="@color/primaryColor" />
+            app:tint="?attr/colorPrimary" />
 
         <TextView
             android:id="@+id/nav_email"
@@ -46,7 +46,7 @@
             android:layout_height="24dp"
             android:contentDescription="@string/coins"
             android:src="@drawable/ic_coins"
-            app:tint="@color/primaryColor" />
+            app:tint="?attr/colorPrimary" />
 
         <TextView
             android:id="@+id/nav_coins"

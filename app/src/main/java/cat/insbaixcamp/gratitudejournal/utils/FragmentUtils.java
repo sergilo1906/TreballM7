@@ -1,5 +1,7 @@
 package cat.insbaixcamp.gratitudejournal.utils;
 
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentActivity;
@@ -13,10 +15,10 @@ public class FragmentUtils {
      *
      * @param fragment The fragment to navigate to.
      */
-    public static void navigateTo(FragmentActivity activity, Fragment fragment, boolean clearBackStack) {
-        if (activity == null || fragment == null) return;
+    public static void navigateTo(Context context, Fragment fragment, boolean clearBackStack) {
+        if (context == null || fragment == null) return;
 
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
 
         if (clearBackStack) {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);

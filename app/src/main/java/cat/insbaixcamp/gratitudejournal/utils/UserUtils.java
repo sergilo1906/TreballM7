@@ -4,39 +4,57 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
 
-import java.util.Objects;
 
 public class UserUtils {
 
     private final FirebaseFirestore firestore;
     private final FirebaseAuth fbAuth;
+    private final String userId;
 
     public UserUtils() {
         firestore = FirebaseFirestore.getInstance();
         fbAuth = FirebaseAuth.getInstance();
+        this.userId = getUserId();
     }
 
-    // Fetch user points from Firestore
-    public void getUserPoints(String userId, OnUserPointsFetchedListener listener) {
+    // Get the current user's ID from FirebaseAuth
+    public String getUserId() {
+        assert fbAuth != null;
+        if (fbAuth.getCurrentUser() != null) {
+            return fbAuth.getCurrentUser().getUid();
+        }
+        return null;
+    }
+
+    // Fetch user points from Firestore asynchronously and use a callback
+    public void getUserPoints(final OnFetchCallback<Integer> callback) {
+        if (userId == null || userId.isEmpty()) {
+            callback.onFailure("User ID is invalid.");
+            return;
+        }
+
         DocumentReference userDocRef = firestore.collection("users").document(userId);
         userDocRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
-                int points = Objects.requireNonNull(documentSnapshot.getLong("points")).intValue();
-                listener.onSuccess(points);
+                Long pointsLong = documentSnapshot.getLong("points");
+                if (pointsLong != null) {
+                    callback.onSuccess(pointsLong.intValue());
+                } else {
+                    callback.onFailure("Points not found.");
+                }
             } else {
-                listener.onFailure("User data not found.");
+                callback.onFailure("User data not found.");
             }
-        }).addOnFailureListener(e -> listener.onFailure("Error fetching points: " + e.getLocalizedMessage()));
+        }).addOnFailureListener(e -> callback.onFailure("Error fetching points: " + e.getMessage()));
     }
 
-    // Update user points in Firestore
-    public void updateUserPoints(String userId, int points, Runnable onSuccess, Runnable onFailure) {
+    // Update user points in Firestore asynchronously
+    public void updateUserPoints(int points, final Runnable onSuccess, final Runnable onFailure) {
         if (userId == null || userId.isEmpty()) {
             onFailure.run();
             return;
         }
 
-        // Reference to the user document in Firestore
         firestore.collection("users")
                 .document(userId)
                 .update("points", points)
@@ -45,25 +63,16 @@ public class UserUtils {
     }
 
     // Delete user data from Firestore
-    public void deleteUserDataFromFirestore(String userId, Runnable onDataDeleted) {
+    public void deleteUserDataFromFirestore(String userId, final Runnable onDataDeleted) {
         DocumentReference userDocRef = firestore.collection("users").document(userId);
         userDocRef.delete()
                 .addOnSuccessListener(aVoid -> onDataDeleted.run())
                 .addOnFailureListener(e -> onDataDeleted.run());
     }
 
-    // Get the current user's ID from FirebaseAuth
-    public String getUserId() {
-        if (fbAuth.getCurrentUser() != null) {
-            return fbAuth.getCurrentUser().getUid();
-        }
-
-        return null;
-    }
-
-    public interface OnUserPointsFetchedListener {
-        void onSuccess(int points);
-
+    // Callback interface for asynchronous fetching
+    public interface OnFetchCallback<T> {
+        void onSuccess(T value);
         void onFailure(String errorMessage);
     }
 }

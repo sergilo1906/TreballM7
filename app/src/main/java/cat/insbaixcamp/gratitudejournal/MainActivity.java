@@ -4,10 +4,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import cat.insbaixcamp.gratitudejournal.fragments.InsightsFragment;
+import cat.insbaixcamp.gratitudejournal.fragments.CalendarFragment;
 import cat.insbaixcamp.gratitudejournal.fragments.LoginFragment;
 import cat.insbaixcamp.gratitudejournal.middlewares.AuthMiddleware;
-import cat.insbaixcamp.gratitudejournal.utils.BottomNavigationUtils;
+import cat.insbaixcamp.gratitudejournal.utils.BottomNavUtils;
 import cat.insbaixcamp.gratitudejournal.utils.FragmentUtils;
 import cat.insbaixcamp.gratitudejournal.utils.SideBarUtils;
 
@@ -23,15 +23,16 @@ public class MainActivity extends AppCompatActivity {
         sbUtils.setup();
 
         // Set up bottom navigation view
-        BottomNavigationUtils bnUtils = new BottomNavigationUtils(this);
+        BottomNavUtils bnUtils = new BottomNavUtils(this);
         bnUtils.setup();
 
         // Show or hide navigation bar / sidebar
         AuthMiddleware authMiddleware = new AuthMiddleware(this);
         if (authMiddleware.isAuthenticated()) {
             sbUtils.enable();
+            sbUtils.fetchData();
             bnUtils.show();
-            FragmentUtils.navigateTo(this, new InsightsFragment(), true);
+            FragmentUtils.navigateTo(this, new CalendarFragment(), true);
         } else {
             sbUtils.disable();
             bnUtils.hide();
