@@ -18,13 +18,15 @@ public class AuthUtils {
 
     private final FirebaseFirestore firestore;
     private final FirebaseAuth fbAuth;
-    private final UserUtils userUtils;
     private final Context context;
 
     public AuthUtils(Context context) {
         firestore = FirebaseFirestore.getInstance();
         fbAuth = FirebaseAuth.getInstance();
+<<<<<<< Updated upstream
         userUtils = new UserUtils();
+=======
+>>>>>>> Stashed changes
         this.context = context;
     }
 
@@ -62,21 +64,7 @@ public class AuthUtils {
                 firestore.collection("users")
                         .document(userId)
                         .set(user)
-                        .addOnSuccessListener(aVoid -> userUtils.updateUserPoints(0,
-                                () -> signIn(email, password, new OnAuthResultListener() {
-                                    @Override
-                                    public void onAuthSuccess() {
-                                        navigateToInsightsFragment();
-                                        listener.onAuthSuccess();
-                                    }
-
-                                    @Override
-                                    public void onAuthFailure(String errorMessage) {
-                                        listener.onAuthFailure(errorMessage);
-                                    }
-                                }),
-                                () -> listener.onAuthFailure("Error initializing points.")
-                        ))
+                        .addOnSuccessListener(aVoid -> signIn(email, password, listener))
                         .addOnFailureListener(e -> listener.onAuthFailure("Error creating user document: " + e.getMessage()));
             } else {
                 String errorMessage = task.getException() != null ? task.getException().getLocalizedMessage() : "Unknown error occurred.";
@@ -95,9 +83,13 @@ public class AuthUtils {
     public void removeAccount(Runnable onAccountRemoved) {
         FirebaseUser currentUser = fbAuth.getCurrentUser();
         if (currentUser != null) {
+<<<<<<< Updated upstream
             String userId = currentUser.getUid();
 
             userUtils.deleteUserDataFromFirestore(userId, () -> currentUser.delete().addOnCompleteListener(task -> {
+=======
+            new UserUtils(context).deleteUserDataFromFirestore(() -> currentUser.delete().addOnCompleteListener(task -> {
+>>>>>>> Stashed changes
                 if (task.isSuccessful()) {
                     onAccountRemoved.run();
                 } else {

@@ -73,6 +73,7 @@ public class UserUtils {
     // Callback interface for asynchronous fetching
     public interface OnFetchCallback<T> {
         void onSuccess(T value);
+
         void onFailure(String errorMessage);
     }
 }
