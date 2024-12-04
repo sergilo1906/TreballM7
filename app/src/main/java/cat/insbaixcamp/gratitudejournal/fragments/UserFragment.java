@@ -19,8 +19,6 @@ public class UserFragment extends Fragment {
         new UserAdapter(
                 view.findViewById(R.id.tv_user_points),
                 view.findViewById(R.id.btn_add_point),
-                view.findViewById(R.id.btn_logout),
-                view.findViewById(R.id.btn_remove_account),
                 getContext()
         );
 

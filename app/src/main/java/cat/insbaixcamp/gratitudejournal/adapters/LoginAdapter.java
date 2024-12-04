@@ -75,7 +75,6 @@ public class LoginAdapter {
             @Override
             public void onAuthSuccess() {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(context, "Login successful!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
