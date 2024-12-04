@@ -23,10 +23,6 @@ public class AuthUtils {
     public AuthUtils(Context context) {
         firestore = FirebaseFirestore.getInstance();
         fbAuth = FirebaseAuth.getInstance();
-<<<<<<< Updated upstream
-        userUtils = new UserUtils();
-=======
->>>>>>> Stashed changes
         this.context = context;
     }
 
@@ -83,13 +79,7 @@ public class AuthUtils {
     public void removeAccount(Runnable onAccountRemoved) {
         FirebaseUser currentUser = fbAuth.getCurrentUser();
         if (currentUser != null) {
-<<<<<<< Updated upstream
-            String userId = currentUser.getUid();
-
-            userUtils.deleteUserDataFromFirestore(userId, () -> currentUser.delete().addOnCompleteListener(task -> {
-=======
             new UserUtils(context).deleteUserDataFromFirestore(() -> currentUser.delete().addOnCompleteListener(task -> {
->>>>>>> Stashed changes
                 if (task.isSuccessful()) {
                     onAccountRemoved.run();
                 } else {

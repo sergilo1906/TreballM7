@@ -23,9 +23,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="cat.insbaixcamp.gratitudejournal" />
-                  <option name="mobileSdkAppId" value="1:681778471229:android:0c60502627ce68eae8e554" />
-                  <option name="projectId" value="gratitude-journal-bcd58" />
-                  <option name="projectNumber" value="681778471229" />
+                  <option name="mobileSdkAppId" value="1:210867426167:android:91df1147d358cfb6688772" />
+                  <option name="projectId" value="gratitude-journal-1ec14" />
+                  <option name="projectNumber" value="210867426167" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

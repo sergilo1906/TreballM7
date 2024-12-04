@@ -42,7 +42,6 @@ public class BottomNavUtils {
         activity.findViewById(R.id.add).setOnClickListener(view -> FragmentUtils.navigateTo(activity, new AddFragment(), false));
     }
 
-
     public void show() {
         if (bottomNavigationView != null) {
             bottomNavigationView.setVisibility(View.VISIBLE);
