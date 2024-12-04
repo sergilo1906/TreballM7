@@ -9,26 +9,13 @@
         android:id="@+id/tv_user_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="@string/current_points"
-        android:textSize="18sp"
-        android:layout_marginBottom="20dp" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btn_add_point"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_point" />
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/log_out" />
-
-    <Button
-        android:id="@+id/btn_remove_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/remove_account" />
-
 </LinearLayout>
