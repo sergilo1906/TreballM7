@@ -1,5 +1,7 @@
 package cat.insbaixcamp.gratitudejournal.utils;
 
+import android.content.Context;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
@@ -10,10 +12,12 @@ public class UserUtils {
     private final FirebaseFirestore firestore;
     private final FirebaseAuth fbAuth;
     private final String userId;
+    private final Context context;
 
-    public UserUtils() {
+    public UserUtils(Context context) {
         firestore = FirebaseFirestore.getInstance();
         fbAuth = FirebaseAuth.getInstance();
+        this.context = context;
         this.userId = getUserId();
     }
 
@@ -60,10 +64,12 @@ public class UserUtils {
                 .update("points", points)
                 .addOnSuccessListener(aVoid -> onSuccess.run())
                 .addOnFailureListener(e -> onFailure.run());
+
+        new SideBarUtils(context).fetchData(); // Update sidebar
     }
 
     // Delete user data from Firestore
-    public void deleteUserDataFromFirestore(String userId, final Runnable onDataDeleted) {
+    public void deleteUserDataFromFirestore(final Runnable onDataDeleted) {
         DocumentReference userDocRef = firestore.collection("users").document(userId);
         userDocRef.delete()
                 .addOnSuccessListener(aVoid -> onDataDeleted.run())

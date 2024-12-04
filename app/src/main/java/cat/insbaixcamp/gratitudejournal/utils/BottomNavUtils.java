@@ -29,8 +29,6 @@ public class BottomNavUtils {
 
             if (item.getItemId() == R.id.calendar) {
                 fragment = new CalendarFragment();
-            } else if (item.getItemId() == R.id.add) {
-                fragment = new AddFragment();
             } else if (item.getItemId() == R.id.user) {
                 fragment = new UserFragment();
             } else {
@@ -40,7 +38,10 @@ public class BottomNavUtils {
             FragmentUtils.navigateTo(activity, fragment, false);
             return true;
         });
+
+        activity.findViewById(R.id.add).setOnClickListener(view -> FragmentUtils.navigateTo(activity, new AddFragment(), false));
     }
+
 
     public void show() {
         if (bottomNavigationView != null) {

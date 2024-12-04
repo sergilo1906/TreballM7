@@ -74,7 +74,6 @@ public class RegisterAdapter {
             @Override
             public void onAuthSuccess() {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(context, "Registration successful!", Toast.LENGTH_SHORT).show();
             }
 
             @Override

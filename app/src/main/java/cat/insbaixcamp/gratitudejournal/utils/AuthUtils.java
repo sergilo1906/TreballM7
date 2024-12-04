@@ -24,7 +24,7 @@ public class AuthUtils {
     public AuthUtils(Context context) {
         firestore = FirebaseFirestore.getInstance();
         fbAuth = FirebaseAuth.getInstance();
-        userUtils = new UserUtils();
+        userUtils = new UserUtils(context);
         this.context = context;
     }
 
@@ -95,9 +95,7 @@ public class AuthUtils {
     public void removeAccount(Runnable onAccountRemoved) {
         FirebaseUser currentUser = fbAuth.getCurrentUser();
         if (currentUser != null) {
-            String userId = currentUser.getUid();
-
-            userUtils.deleteUserDataFromFirestore(userId, () -> currentUser.delete().addOnCompleteListener(task -> {
+            userUtils.deleteUserDataFromFirestore(() -> currentUser.delete().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     onAccountRemoved.run();
                 } else {
