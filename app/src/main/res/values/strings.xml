@@ -1,16 +1,26 @@
 <resources>
     <string name="app_name">Gratitude Journal</string>
-    <string name="menu_insights">Insights</string>
+
     <string name="menu_calendar">Calendar</string>
-    <string name="login">Login</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_profile">Profile</string>
+
     <string name="email">Email</string>
+    <string name="coins">Coins</string>
+    <string name="current_points">Current Points: %d</string>
+    <string name="log_out">Log Out</string>
+    <string name="remove_account">Remove Account</string>
+
+    <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="click_to_login">Click to Login</string>
     <string name="click_to_register">Click to Register</string>
-    <string name="menu_user">User</string>
-    <string name="current_points">Current Points: %d</string>
-    <string name="log_out">Log Out</string>
+
+    <string name="profile_image_desc">Profile image</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+
+    <!-- -->
     <string name="add_point">Add Point</string>
-    <string name="remove_account">Remove Account</string>
 </resources>

@@ -11,10 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import androidx.fragment.app.FragmentActivity;
-
-import cat.insbaixcamp.gratitudejournal.R;
-import cat.insbaixcamp.gratitudejournal.fragments.InsightsFragment;
+import cat.insbaixcamp.gratitudejournal.fragments.CalendarFragment;
 
 
 public class AuthUtils {
@@ -33,11 +30,10 @@ public class AuthUtils {
 
     // Helper method to navigate to InsightsFragment after login
     private void navigateToInsightsFragment() {
-        ((FragmentActivity) context).getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new InsightsFragment())
-                .addToBackStack(null)
-                .commit();
+        new BottomNavUtils(context).show();
+        new SideBarUtils(context).enable();
+        new SideBarUtils(context).fetchData();
+        FragmentUtils.navigateTo(context, new CalendarFragment(), true);
     }
 
     // Sign in with email and password
@@ -59,7 +55,6 @@ public class AuthUtils {
             if (task.isSuccessful()) {
                 String userId = Objects.requireNonNull(fbAuth.getCurrentUser()).getUid();
 
-                // Create a map of user data instead of using the User object
                 Map<String, Object> user = new HashMap<>();
                 user.put("userId", userId);
                 user.put("points", 0);
@@ -67,7 +62,7 @@ public class AuthUtils {
                 firestore.collection("users")
                         .document(userId)
                         .set(user)
-                        .addOnSuccessListener(aVoid -> userUtils.updateUserPoints(userId, 0,
+                        .addOnSuccessListener(aVoid -> userUtils.updateUserPoints(0,
                                 () -> signIn(email, password, new OnAuthResultListener() {
                                     @Override
                                     public void onAuthSuccess() {
@@ -111,6 +106,28 @@ public class AuthUtils {
                 }
             }));
         }
+    }
+
+    // Gets the user email
+    public String getEmail() {
+        SharedPrefsUtils sharedPrefsUtils = new SharedPrefsUtils(context, "account");
+
+        if (!sharedPrefsUtils.get("email", "").isEmpty()) {
+            return sharedPrefsUtils.get("email", "anonymous");
+        }
+
+        FirebaseUser currentUser = fbAuth.getCurrentUser();
+        if (currentUser != null && currentUser.getEmail() != null) {
+            String email = currentUser.getEmail();
+
+            if (!email.isEmpty()) {
+                sharedPrefsUtils.createOrUpdate("email", email);
+            }
+
+            return email;
+        }
+
+        return "anonymous";
     }
 
     public interface OnAuthResultListener {

@@ -5,32 +5,25 @@ import android.content.Context;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import cat.insbaixcamp.gratitudejournal.MainActivity;
-import cat.insbaixcamp.gratitudejournal.R;
 import cat.insbaixcamp.gratitudejournal.fragments.LoginFragment;
+import cat.insbaixcamp.gratitudejournal.utils.FragmentUtils;
 
 public class AuthMiddleware {
 
+    private final Context context;
     private final FirebaseAuth fbAuth;
 
-    public AuthMiddleware() {
+    public AuthMiddleware(Context context) {
+        this.context = context;
         fbAuth = FirebaseAuth.getInstance();
     }
 
-    public boolean isAuthenticated(Context context) {
+    public boolean isAuthenticated() {
         FirebaseUser fbUser = fbAuth.getCurrentUser();
         if (fbUser == null) {
-            showLoginFragment(context);
+            FragmentUtils.navigateTo(context, new LoginFragment(), true);
             return false;
         }
         return true;
-    }
-
-    private void showLoginFragment(Context context) {
-        ((androidx.fragment.app.FragmentActivity) context).getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new LoginFragment())
-                .addToBackStack(null)
-                .commit();
     }
 }

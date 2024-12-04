@@ -4,20 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import cat.insbaixcamp.gratitudejournal.adapters.LoginAdapter;
 import cat.insbaixcamp.gratitudejournal.R;
+import cat.insbaixcamp.gratitudejournal.adapters.AddAdapter;
 
-public class LoginFragment extends Fragment {
+public class AddFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_add, container, false);
 
-        LoginAdapter loginAdapter = new LoginAdapter(view.findViewById(R.id.progress_bar), getContext());
-        loginAdapter.setup(view);
+        TextView tvSample = view.findViewById(R.id.add_text);
+        tvSample.setText("TODO: Edit Add page");
+
+        AddAdapter addAdapter = new AddAdapter();
 
         return view;
     }
