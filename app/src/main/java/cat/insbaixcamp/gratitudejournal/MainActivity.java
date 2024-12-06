@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
         bnUtils.setup();
 
         // Show or hide navigation bar / sidebar
-        AuthMiddleware authMiddleware = new AuthMiddleware(this);
-        if (authMiddleware.isAuthenticated()) {
+        if (AuthMiddleware.isAuthenticated()) {
             sbUtils.enable();
             sbUtils.fetchData();
             bnUtils.show();
