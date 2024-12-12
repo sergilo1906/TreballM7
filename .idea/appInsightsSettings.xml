@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="cat.insbaixcamp.gratitudejournal" />
-                  <option name="mobileSdkAppId" value="1:210867426167:android:91df1147d358cfb6688772" />
-                  <option name="projectId" value="gratitude-journal-1ec14" />
-                  <option name="projectNumber" value="210867426167" />
+                  <option name="appId" value="PLACEHOLDER" />
+                  <option name="mobileSdkAppId" value="" />
+                  <option name="projectId" value="" />
+                  <option name="projectNumber" value="" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

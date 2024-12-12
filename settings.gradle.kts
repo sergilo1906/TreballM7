@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Gratitude Journal"
 include(":app")
+ 

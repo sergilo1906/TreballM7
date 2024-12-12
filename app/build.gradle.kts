@@ -5,12 +5,11 @@ plugins {
 
 android {
     namespace = "cat.insbaixcamp.gratitudejournal"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "cat.insbaixcamp.gratitudejournal"
         minSdk = 24
-        //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
         versionName = "0.1.0"
@@ -28,21 +27,20 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
 
-    implementation(libs.appcompat)
     implementation(libs.activity)
+    implementation(libs.appcompat)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(libs.material)
 }
