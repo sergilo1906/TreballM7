@@ -30,10 +30,10 @@ public class UserAdapter {
     }
 
     private void addPoints() {
-        userUtils.getUserPoints(new UserUtils.OnFetchCallback<>() {
+        userUtils.getUserPoints(new UserUtils.OnFetchCallback() {
             @Override
-            public void onSuccess(Integer points) {
-                int newPoints = points + 1;
+            public void onSuccess(Object points) {
+                int newPoints = ((Integer) points) + 1;
                 userUtils.updateUserPoints(newPoints,
                         () -> {
                             String formattedPoints = context.getString(R.string.current_points, newPoints);
@@ -52,10 +52,10 @@ public class UserAdapter {
     }
 
     private void fetchUserPoints() {
-        userUtils.getUserPoints(new UserUtils.OnFetchCallback<>() {
+        userUtils.getUserPoints(new UserUtils.OnFetchCallback() {
             @Override
-            public void onSuccess(Integer points) {
-                String formattedPoints = context.getString(R.string.current_points, points);
+            public void onSuccess(Object points) {
+                String formattedPoints = context.getString(R.string.current_points, (Integer) points);
                 tvPoints.setText(formattedPoints);
             }
 
