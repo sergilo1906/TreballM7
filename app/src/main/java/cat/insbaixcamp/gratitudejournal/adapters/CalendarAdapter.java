@@ -1,9 +1,12 @@
 package cat.insbaixcamp.gratitudejournal.adapters;
 
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ import java.util.Map;
 import cat.insbaixcamp.gratitudejournal.R;
 import cat.insbaixcamp.gratitudejournal.models.CalendarItem;
 import cat.insbaixcamp.gratitudejournal.utils.DateUtils;
+import cat.insbaixcamp.gratitudejournal.utils.SharedPrefsUtils;
 
 public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -75,7 +79,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public static class CalendarEventViewHolder extends RecyclerView.ViewHolder {
+    public class CalendarEventViewHolder extends RecyclerView.ViewHolder {
         private final TextView title;
         private final TextView description;
         private final TextView date;
@@ -85,6 +89,44 @@ public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             title = itemView.findViewById(R.id.tv_event_title);
             description = itemView.findViewById(R.id.tv_event_description);
             date = itemView.findViewById(R.id.tv_event_date);
+
+            itemView.setOnLongClickListener(v -> {
+                // Create an AlertDialog to ask what the user wants to do
+                AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+                builder.setTitle("What would you like to do with the note?");
+
+                // Set up the dialog with Positive and Negative buttons
+                builder.setNegativeButton("Modify", (dialog, which) -> {
+                    // TODO
+                });
+
+                builder.setNeutralButton("Delete", (dialog, which) -> {
+                    SharedPrefsUtils.removeCalendarItem(
+                            itemView.getContext(),
+                            new CalendarItem(
+                                    title.getText().toString(),
+                                    description.getText().toString(),
+                                    DateUtils.parseDate(date.getText().toString())
+                            )
+                    );
+
+                    final int position = getAdapterPosition();
+
+                    // AQUI QUIERE NOTIFICAR AL ADAPTADOR QUE SE HA ELIMINADO UN ELEMENTO
+                    items.remove(position);
+                    notifyItemRemoved(position);
+
+                    if (items.get(position - 1) instanceof String && (items.size() > position && items.get(position) instanceof String) || (items.size() == position)) {
+                        items.remove(position - 1);
+                        notifyItemRemoved(position - 1);
+                    }
+                });
+
+                // Show the dialog
+                builder.create().show();
+                return true;
+            });
+
         }
 
         public void bind(CalendarItem event) {

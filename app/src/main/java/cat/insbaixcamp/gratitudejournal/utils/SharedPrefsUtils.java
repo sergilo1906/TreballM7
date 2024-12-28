@@ -153,6 +153,20 @@ public class SharedPrefsUtils {
     }
 
     /**
+     * Removes a CalendarItem from the existing list and saves the updated list in SharedPreferences.
+     *
+     * @param context The application context.
+     * @param item    The CalendarItem to remove.
+     */
+    public static void removeCalendarItem(Context context, CalendarItem item) {
+        List<CalendarItem> items = getCalendarItems(context);
+        if (items.contains(item)) {
+            items.remove(item);
+            saveCalendarItems(context, items);
+        }
+    }
+
+    /**
      * Clears all CalendarItem saved in SharedPreferences.
      *
      * @param context The application context.
