@@ -61,10 +61,10 @@ public class SideBarUtils implements NavigationView.OnNavigationItemSelectedList
         View headerView = navigationView.getHeaderView(0);
         ((TextView) headerView.findViewById(R.id.nav_email)).setText(authUtils.getEmail());
 
-        userUtils.getUserPoints(new UserUtils.OnFetchCallback<>() {
+        userUtils.getUserPoints(new UserUtils.OnFetchCallback() {
             @Override
-            public void onSuccess(Integer points) {
-                String formattedPoints = activity.getString(R.string.current_points, points);
+            public void onSuccess(Object points) {
+                String formattedPoints = activity.getString(R.string.current_points, (Integer) points);
                 ((TextView) headerView.findViewById(R.id.nav_coins)).setText(formattedPoints);
             }
 
