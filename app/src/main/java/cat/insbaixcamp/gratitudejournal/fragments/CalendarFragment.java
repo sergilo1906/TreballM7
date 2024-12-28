@@ -21,6 +21,7 @@ import cat.insbaixcamp.gratitudejournal.R;
 import cat.insbaixcamp.gratitudejournal.adapters.CalendarAdapter;
 import cat.insbaixcamp.gratitudejournal.models.CalendarItem;
 import cat.insbaixcamp.gratitudejournal.utils.DateUtils;
+import cat.insbaixcamp.gratitudejournal.utils.SharedPrefsUtils;
 
 public class CalendarFragment extends Fragment {
     private final List<String> months = new ArrayList<>();
@@ -45,11 +46,11 @@ public class CalendarFragment extends Fragment {
         List<CalendarItem> allCalendarItems;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            allCalendarItems = getSampleCalendarItems().stream()
+            allCalendarItems = SharedPrefsUtils.getCalendarItems(getContext()).stream()
                     .sorted(Comparator.comparing(CalendarItem::getDate).reversed())
                     .toList();
         } else {
-            allCalendarItems = getSampleCalendarItems();
+            allCalendarItems = SharedPrefsUtils.getCalendarItems(getContext());
             allCalendarItems.sort((item1, item2) -> item2.getDate().compareTo(item1.getDate()));
         }
 
@@ -63,20 +64,5 @@ public class CalendarFragment extends Fragment {
                     })
                     .add(item);
         });
-    }
-
-    private List<CalendarItem> getSampleCalendarItems() {
-        List<CalendarItem> items = new ArrayList<>();
-
-        items.add(new CalendarItem("Meeting", "Discuss project status", DateUtils.parseDate("2024-01-15")));
-        items.add(new CalendarItem("Doctor Appointment", "Annual check-up", DateUtils.parseDate("2024-05-10")));
-        items.add(new CalendarItem("Conference", "Tech conference in San Francisco", DateUtils.parseDate("2024-02-25")));
-        items.add(new CalendarItem("Workshop", "Android development workshop", DateUtils.parseDate("2024-09-05")));
-        items.add(new CalendarItem("Vacation", "Beach trip", DateUtils.parseDate("2024-07-20")));
-        items.add(new CalendarItem("Team Outing", "Company picnic", DateUtils.parseDate("2024-12-15")));
-        items.add(new CalendarItem("Client Presentation", "Present new proposal", DateUtils.parseDate("2024-12-01")));
-
-        items.sort(Comparator.comparing(CalendarItem::getDate));
-        return items;
     }
 }

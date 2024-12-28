@@ -3,10 +3,23 @@ package cat.insbaixcamp.gratitudejournal.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import cat.insbaixcamp.gratitudejournal.models.CalendarItem;
+
 public class SharedPrefsUtils {
 
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
+
+    private static final String PREFS_NAME = "calendar_items_prefs";
+    private static final String ITEMS_KEY = "calendar_items";
 
     // Constructor
     public SharedPrefsUtils(Context context, String prefsName) {
@@ -79,4 +92,74 @@ public class SharedPrefsUtils {
         }
         return (T) result;
     }
+
+    /**
+     * Saves a list of CalendarItem in SharedPreferences.
+     *
+     * @param context The application context.
+     * @param items   The list of CalendarItem to save.
+     */
+    public static void saveCalendarItems(Context context, List<CalendarItem> items) {
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(items);
+            oos.close();
+            String serializedItems = android.util.Base64.encodeToString(baos.toByteArray(), android.util.Base64.DEFAULT);
+            sharedPreferences.edit().putString(ITEMS_KEY, serializedItems).apply();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Retrieves the list of CalendarItem from SharedPreferences.
+     *
+     * @param context The application context.
+     * @return A list of CalendarItem.
+     */
+    public static List<CalendarItem> getCalendarItems(Context context) {
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            String serializedItems = sharedPreferences.getString(ITEMS_KEY, "");
+            if (serializedItems.isEmpty()) {
+                return new ArrayList<>();
+            }
+            byte[] data = android.util.Base64.decode(serializedItems, android.util.Base64.DEFAULT);
+            ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
+            List<CalendarItem> items = (List<CalendarItem>) ois.readObject();
+            ois.close();
+
+            items.sort(Comparator.comparing(CalendarItem::getDate));
+
+            return items;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Adds a CalendarItem to the existing list and saves it in SharedPreferences.
+     *
+     * @param context The application context.
+     * @param item    The CalendarItem to add.
+     */
+    public static void addCalendarItem(Context context, CalendarItem item) {
+        List<CalendarItem> items = getCalendarItems(context);
+        items.add(item);
+        saveCalendarItems(context, items);
+    }
+
+    /**
+     * Clears all CalendarItem saved in SharedPreferences.
+     *
+     * @param context The application context.
+     */
+    public static void clearCalendarItems(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        sharedPreferences.edit().remove(ITEMS_KEY).apply();
+    }
+
 }

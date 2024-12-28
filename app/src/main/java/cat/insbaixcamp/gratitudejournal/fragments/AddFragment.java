@@ -16,10 +16,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import cat.insbaixcamp.gratitudejournal.R;
-import cat.insbaixcamp.gratitudejournal.adapters.AddAdapter;
 import cat.insbaixcamp.gratitudejournal.models.CalendarItem;
-import cat.insbaixcamp.gratitudejournal.utils.DataSaver;
 import cat.insbaixcamp.gratitudejournal.utils.DateUtils;
+import cat.insbaixcamp.gratitudejournal.utils.SharedPrefsUtils;
 
 public class AddFragment extends Fragment {
 
@@ -49,7 +48,7 @@ public class AddFragment extends Fragment {
                 return;
             }
 
-            DataSaver.addCalendarItem(getContext(), new CalendarItem(etTitle.getText().toString(), etDescription.getText().toString(), DateUtils.parseDate(etDate.getText().toString())));
+            SharedPrefsUtils.addCalendarItem(getContext(), new CalendarItem(etTitle.getText().toString(), etDescription.getText().toString(), DateUtils.parseDate(etDate.getText().toString())));
             Toast.makeText(getContext(), "Note added successfully", Toast.LENGTH_SHORT).show();
             etDate.setText(currentDate);
             etTitle.setText("");
