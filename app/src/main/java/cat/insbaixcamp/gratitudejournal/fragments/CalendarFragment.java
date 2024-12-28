@@ -64,5 +64,9 @@ public class CalendarFragment extends Fragment {
                     })
                     .add(item);
         });
+
+        if (months.isEmpty()) {
+            months.add("There are no notes created");
+        }
     }
 }

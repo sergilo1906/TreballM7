@@ -119,6 +119,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     if (items.get(position - 1) instanceof String && (items.size() > position && items.get(position) instanceof String) || (items.size() == position)) {
                         items.remove(position - 1);
                         notifyItemRemoved(position - 1);
+
+                        if (items.size() == 0) {
+                            items.add("There are no notes created");
+                            notifyItemInserted(0);
+                        }
                     }
                 });
 
