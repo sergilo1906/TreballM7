@@ -18,9 +18,18 @@ import java.util.Locale;
 import cat.insbaixcamp.gratitudejournal.R;
 import cat.insbaixcamp.gratitudejournal.models.CalendarItem;
 import cat.insbaixcamp.gratitudejournal.utils.DateUtils;
+import cat.insbaixcamp.gratitudejournal.utils.FragmentUtils;
 import cat.insbaixcamp.gratitudejournal.utils.SharedPrefsUtils;
 
 public class AddFragment extends Fragment {
+
+    CalendarItem calendarItemToEdit = null;
+
+    public AddFragment() {}
+
+    public AddFragment(CalendarItem calendarItem) {
+        calendarItemToEdit = calendarItem;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,8 +40,15 @@ public class AddFragment extends Fragment {
         EditText etDescription = view.findViewById(R.id.et_description);
         Button btSave = view.findViewById(R.id.bt_save);
 
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        etDate.setText(currentDate);
+        if (calendarItemToEdit != null) {
+            etDate.setText(DateUtils.formatDateToString(calendarItemToEdit.getDate()));
+            etTitle.setText(calendarItemToEdit.getTitle());
+            etDescription.setText(calendarItemToEdit.getDescription());
+            btSave.setText("Update Note");
+        } else {
+            String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            etDate.setText(currentDate);
+        }
 
         btSave.setOnClickListener(v -> {
             if (DateUtils.parseDate(etDate.getText().toString()) == null) {
@@ -48,11 +64,22 @@ public class AddFragment extends Fragment {
                 return;
             }
 
-            SharedPrefsUtils.addCalendarItem(getContext(), new CalendarItem(etTitle.getText().toString(), etDescription.getText().toString(), DateUtils.parseDate(etDate.getText().toString())));
-            Toast.makeText(getContext(), "Note added successfully", Toast.LENGTH_SHORT).show();
-            etDate.setText(currentDate);
-            etTitle.setText("");
-            etDescription.setText("");
+
+            CalendarItem createdCalendarItem = new CalendarItem(etTitle.getText().toString(), etDescription.getText().toString(), DateUtils.parseDate(etDate.getText().toString()));
+            if (calendarItemToEdit != null) {
+                SharedPrefsUtils.updateCalendarItem(getContext(), calendarItemToEdit, createdCalendarItem);
+
+                Toast.makeText(getContext(), "Note updated successfully", Toast.LENGTH_SHORT).show();
+                FragmentUtils.navigateTo(getContext(), new CalendarFragment(), true);
+            } else {
+                SharedPrefsUtils.addCalendarItem(getContext(), createdCalendarItem);
+
+                Toast.makeText(getContext(), "Note added successfully", Toast.LENGTH_SHORT).show();
+                String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                etDate.setText(currentDate);;
+                etTitle.setText("");
+                etDescription.setText("");
+            }
         });
 
         return view;

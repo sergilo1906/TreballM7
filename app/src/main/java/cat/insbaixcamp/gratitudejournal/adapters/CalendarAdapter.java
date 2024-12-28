@@ -14,8 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 import cat.insbaixcamp.gratitudejournal.R;
+import cat.insbaixcamp.gratitudejournal.fragments.AddFragment;
 import cat.insbaixcamp.gratitudejournal.models.CalendarItem;
 import cat.insbaixcamp.gratitudejournal.utils.DateUtils;
+import cat.insbaixcamp.gratitudejournal.utils.FragmentUtils;
 import cat.insbaixcamp.gratitudejournal.utils.SharedPrefsUtils;
 
 public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -91,28 +93,26 @@ public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             date = itemView.findViewById(R.id.tv_event_date);
 
             itemView.setOnLongClickListener(v -> {
+
+                CalendarItem calendarItem =new CalendarItem(
+                        title.getText().toString(),
+                        description.getText().toString(),
+                        DateUtils.parseDate(date.getText().toString())
+                );
+
                 // Create an AlertDialog to ask what the user wants to do
                 AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
                 builder.setTitle("What would you like to do with the note?");
 
                 // Set up the dialog with Positive and Negative buttons
                 builder.setNegativeButton("Modify", (dialog, which) -> {
-                    // TODO
+                    FragmentUtils.navigateTo(itemView.getContext(), new AddFragment(calendarItem), true);
                 });
 
                 builder.setNeutralButton("Delete", (dialog, which) -> {
-                    SharedPrefsUtils.removeCalendarItem(
-                            itemView.getContext(),
-                            new CalendarItem(
-                                    title.getText().toString(),
-                                    description.getText().toString(),
-                                    DateUtils.parseDate(date.getText().toString())
-                            )
-                    );
-
                     final int position = getAdapterPosition();
 
-                    // AQUI QUIERE NOTIFICAR AL ADAPTADOR QUE SE HA ELIMINADO UN ELEMENTO
+                    SharedPrefsUtils.removeCalendarItem(itemView.getContext(), calendarItem);
                     items.remove(position);
                     notifyItemRemoved(position);
 

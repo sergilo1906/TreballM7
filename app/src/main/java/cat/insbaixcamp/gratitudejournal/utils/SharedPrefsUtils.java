@@ -167,6 +167,27 @@ public class SharedPrefsUtils {
     }
 
     /**
+     * Updates an existing CalendarItem in the list and saves the updated list in SharedPreferences.
+     *
+     * @param context      The application context.
+     * @param previousItem The CalendarItem to be updated.
+     * @param updatedItem  The new CalendarItem with updated data.
+     */
+    public static void updateCalendarItem(Context context, CalendarItem previousItem, CalendarItem updatedItem) {
+        List<CalendarItem> items = getCalendarItems(context);
+
+        // Find the index of the item to be updated
+        int index = items.indexOf(previousItem);
+        if (index != -1) {
+            // Replace the old item with the updated one
+            items.set(index, updatedItem);
+
+            // Save the updated list back to SharedPreferences
+            saveCalendarItems(context, items);
+        }
+    }
+
+    /**
      * Clears all CalendarItem saved in SharedPreferences.
      *
      * @param context The application context.
