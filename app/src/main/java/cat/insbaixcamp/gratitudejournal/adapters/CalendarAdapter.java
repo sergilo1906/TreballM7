@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -100,14 +99,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         DateUtils.parseDate(date.getText().toString())
                 );
 
-                // Create an AlertDialog to ask what the user wants to do
                 AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
                 builder.setTitle("What would you like to do with the note?");
 
-                // Set up the dialog with Positive and Negative buttons
-                builder.setNegativeButton("Modify", (dialog, which) -> {
-                    FragmentUtils.navigateTo(itemView.getContext(), new AddFragment(calendarItem), true);
-                });
+                builder.setNegativeButton("Modify", (dialog, which) -> FragmentUtils.navigateTo(itemView.getContext(), new AddFragment(calendarItem), true));
 
                 builder.setNeutralButton("Delete", (dialog, which) -> {
                     final int position = getAdapterPosition();
@@ -120,14 +115,13 @@ public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         items.remove(position - 1);
                         notifyItemRemoved(position - 1);
 
-                        if (items.size() == 0) {
+                        if (items.isEmpty()) {
                             items.add("There are no notes created");
                             notifyItemInserted(0);
                         }
                     }
                 });
 
-                // Show the dialog
                 builder.create().show();
                 return true;
             });

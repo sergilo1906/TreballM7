@@ -12,8 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:ellipsize="end"
+        android:shadowColor="#888888"
+        android:shadowDx="2"
+        android:shadowDy="2"
         android:maxLines="1"
-        android:textColor="@color/textColor"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -22,16 +24,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:shadowColor="#888888"
+        android:shadowDx="2"
+        android:shadowDy="2"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textColor="@color/textColorSecondary"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tv_event_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:shadowColor="#888888"
+        android:shadowDx="2"
+        android:shadowDy="2"
         android:layout_marginTop="4dp"
-        android:textColor="@color/textColorTertiary"
         android:textSize="12sp" />
 </LinearLayout>

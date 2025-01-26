@@ -10,6 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:shadowColor="#888888"
+        android:shadowDx="2"
+        android:shadowDy="2"
         android:textSize="18sp"
         android:textStyle="bold" />
 

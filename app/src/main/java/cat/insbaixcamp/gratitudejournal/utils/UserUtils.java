@@ -31,7 +31,7 @@ public class UserUtils {
     }
 
     // Fetch user points from Firestore asynchronously and use a callback
-    public void getUserPoints(final OnFetchCallback<Integer> callback) {
+    public void getUserPoints(final OnFetchCallback callback) {
         if (userId == null || userId.isEmpty()) {
             callback.onFailure("User ID is invalid.");
             return;
@@ -77,8 +77,8 @@ public class UserUtils {
     }
 
     // Callback interface for asynchronous fetching
-    public interface OnFetchCallback<T> {
-        void onSuccess(T value);
+    public interface OnFetchCallback {
+        void onSuccess(Object value);
 
         void onFailure(String errorMessage);
     }
