@@ -57,7 +57,7 @@ public class AuthUtils {
                 user.put("userId", userId);
                 user.put("points", 1);
                 user.put("dayStreak", 1);
-                user.put("lastConnection", System.currentTimeMillis());
+                user.put("lastTimeNoteCreated", System.currentTimeMillis());
                 user.put("backgrounds", 1);
                 user.put("currentBackground", 0);
                 user.put("avatars", 3);
