@@ -55,7 +55,13 @@ public class AuthUtils {
 
                 Map<String, Object> user = new HashMap<>();
                 user.put("userId", userId);
-                user.put("points", 0);
+                user.put("points", 1);
+                user.put("dayStreak", 1);
+                user.put("lastConnection", System.currentTimeMillis());
+                user.put("backgrounds", 1);
+                user.put("currentBackground", 0);
+                user.put("avatars", 3);
+                user.put("currentAvatar", 0);
 
                 firestore.collection("users")
                         .document(userId)
