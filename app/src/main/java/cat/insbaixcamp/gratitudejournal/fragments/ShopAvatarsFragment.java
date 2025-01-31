@@ -30,12 +30,12 @@ public class ShopAvatarsFragment extends Fragment {
         shopItems = new ShopAvatarItem[]{
             new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem1), 0, R.drawable.profile_1, view.findViewById(R.id.clShopItem1), 0),
             new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem2), 0, R.drawable.profile_2, view.findViewById(R.id.clShopItem2), 1),
-            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem3), 10, R.drawable.profile_3, view.findViewById(R.id.clShopItem3), 2),
-            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem4), 10, R.drawable.profile_4, view.findViewById(R.id.clShopItem4), 3),
-            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem5), 10, R.drawable.profile_5, view.findViewById(R.id.clShopItem5), 4),
-            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem6), 10, R.drawable.profile_6, view.findViewById(R.id.clShopItem6), 5),
-            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem7), 10, R.drawable.profile_7, view.findViewById(R.id.clShopItem7), 6),
-            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem8), 10, R.drawable.profile_8, view.findViewById(R.id.clShopItem8), 7)
+            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem3), 5, R.drawable.profile_3, view.findViewById(R.id.clShopItem3), 2),
+            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem4), 5, R.drawable.profile_4, view.findViewById(R.id.clShopItem4), 3),
+            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem5), 5, R.drawable.profile_5, view.findViewById(R.id.clShopItem5), 4),
+            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem6), 5, R.drawable.profile_6, view.findViewById(R.id.clShopItem6), 5),
+            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem7), 5, R.drawable.profile_7, view.findViewById(R.id.clShopItem7), 6),
+            new ShopAvatarItem(view.findViewById(R.id.tvPriceShopItem8), 5, R.drawable.profile_8, view.findViewById(R.id.clShopItem8), 7)
         };
 
         for (int i = 0; i < 8; i++) {

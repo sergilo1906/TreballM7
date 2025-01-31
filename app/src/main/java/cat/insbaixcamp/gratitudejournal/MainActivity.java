@@ -49,50 +49,23 @@ public class MainActivity extends AppCompatActivity {
             bnUtils.show();
 
             userUtils = new UserUtils(this);
-            userUtils.getUserAttribute("lastConnection", new UserUtils.OnFetchCallback<Long>() {
+            userUtils.getUserAttribute("lastTimeNoteCreated", new UserUtils.OnFetchCallback<Long>() {
                 @Override
-                public void onSuccess(Long lastConnectionDate) {
-                    userUtils.updateUserAttribute("lastConnection", System.currentTimeMillis(), () -> {}, () -> {
-                        Toast.makeText(getApplicationContext(), "An error ocurred while updating your last connection", Toast.LENGTH_LONG).show();
-                    });
-
+                public void onSuccess(Long lastTimeNoteCreatedDate) {
                     Calendar today = Calendar.getInstance();
 
                     Calendar dateFromTimestamp = Calendar.getInstance();
-                    dateFromTimestamp.setTime(new Date(lastConnectionDate));
-
-                    if (isSameDay(today, dateFromTimestamp)) {
-                        Toast.makeText(getApplicationContext(), "Welcome back again!", Toast.LENGTH_LONG).show();
-                        return;
-                    }
+                    dateFromTimestamp.setTime(new Date(lastTimeNoteCreatedDate));
 
                     Calendar yesterday = (Calendar) today.clone();
                     yesterday.add(Calendar.DAY_OF_YEAR, -1);
-                    if (isSameDay(yesterday, dateFromTimestamp)) {
-                        userUtils.getUserAttribute("dayStreak", new UserUtils.OnFetchCallback<Long>() {
-                            @Override
-                            public void onSuccess(Long value) {
-                                value = value + 1;
-                                Toast.makeText(getApplicationContext(), "Your day streak is " + value + "!", Toast.LENGTH_LONG).show();
-                                userUtils.updateUserAttribute("dayStreak", value, () -> {}, () -> {
-                                    Toast.makeText(getApplicationContext(), "An error ocurred while updating your day streak", Toast.LENGTH_LONG).show();
-                                });
-                                userUtils.increaseUserPoints(value.intValue());
-                            }
 
-                            @Override
-                            public void onFailure(String errorMessage) {
-                                Toast.makeText(getApplicationContext(), "Error fetching your day streak", Toast.LENGTH_LONG).show();
-                            }
+                    if (!isSameDay(today, dateFromTimestamp) && !isSameDay(yesterday, dateFromTimestamp)) {
+                        Toast.makeText(getApplicationContext(), "You lost your day streak", Toast.LENGTH_LONG).show();
+                        userUtils.updateUserAttribute("dayStreak", 0, () -> {}, () -> {
+                            Toast.makeText(getApplicationContext(), "An error ocurred while updating your day streak", Toast.LENGTH_LONG).show();
                         });
-                        return;
                     }
-
-                    Toast.makeText(getApplicationContext(), "You lost your day streak", Toast.LENGTH_LONG).show();
-                    userUtils.updateUserAttribute("dayStreak", 1, () -> {}, () -> {
-                        Toast.makeText(getApplicationContext(), "An error ocurred while updating your day streak", Toast.LENGTH_LONG).show();
-                    });
-                    userUtils.increaseUserPoints(1);
                 }
 
                 @Override
