@@ -21,27 +21,6 @@
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
 
-    <string name="add_point">Add point</string>
-    <string name="background_number">Background %d</string>
-
-    <string name="error_invalid_date">Write a valid date</string>
-    <string name="error_empty_title">Write a title</string>
-    <string name="error_empty_description">Write a description</string>
-    <string name="note_added_successfully">Note added successfully</string>
-    <string name="note_updated_successfully">Note updated successfully</string>
-    <string name="update_note_button_text">Update Note</string>
-    <string name="default_date_format">yyyy-MM-dd</string>
-
-    <string name="onboarding_title_one">Welcome to the App</string>
-    <string name="onboarding_title_two">Track Your Progress</string>
-    <string name="onboarding_title_three">Achieve Your Goals</string>
-    <string name="onboarding_description_one">Discover all the amazing features we have to offer to enhance your experience.</string>
-    <string name="onboarding_description_two">Stay on top of your goals with our easy-to-use tools.</string>
-    <string name="onboarding_description_three">Make consistent progress toward achieving your dreams!</string>
-    <string name="onboarding_button_finish">Get Started</string>
-    <string name="show_buy_menu">Show buy menu</string>
-
-    <string name="select_background">Select Background</string>
-    <string name="buy_background">Buy for %1$d points</string>
-    <string name="cost_format">Cost: %d Points</string>
+    <!-- -->
+    <string name="add_point">Add Point</string>
 </resources>
