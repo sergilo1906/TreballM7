@@ -7,9 +7,19 @@
 
     <string name="email">Email</string>
     <string name="coins">Coins</string>
-    <string name="current_points">Current Points: %d</string>
+    <string name="current_points">Current Points: %d 💰</string>
+    <string name="day_streak">Day Streak: %d 🔥</string>
+    <string name="shop_item_price">💰 %d points 💰</string>
+    <string name="shop">Shop</string>
     <string name="log_out">Log Out</string>
     <string name="remove_account">Remove Account</string>
+
+    <string name="title_background_1">Basic Background</string>
+    <string name="title_background_2">Minimalist Background</string>
+    <string name="title_background_3">Scales Background</string>
+    <string name="title_background_4">Golden Background</string>
+    <string name="title_background_5">Gradient Background</string>
+    <string name="title_background_6">Sky Background</string>
 
     <string name="login">Login</string>
     <string name="password">Password</string>
